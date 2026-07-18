@@ -26,7 +26,8 @@ Adding words to a prompt often *hurts*. The word **"normal"** reduces CLIP's ret
 CLIP's attention rollout is pathology-invariant: the same generic template appears for cardiomegaly, pneumonia, effusion, and normal cases. Attention concentrates on image corners, laterality markers, and equipment artifacts — never on the diagnostically relevant anatomy.
 
 <p align="center">
-  <img src="figures/category_importance.png" width="600"/>
+  <img width="888" height="398" alt="Screenshot 2026-07-18 at 15 46 23" src="https://github.com/user-attachments/assets/710197a5-16a1-4c6a-8d28-985f37a76ff0" />
+
   <br>
   <em>Mean token importance by linguistic category. CLIP peaks on modality; BiomedCLIP peaks on clinical.</em>
 </p>
@@ -50,8 +51,8 @@ CLIP's attention rollout is pathology-invariant: the same generic template appea
 ## Repository Contents
 
 ```
-├── medical_clip_token_analysis.ipynb   # Self-contained Colab notebook
-├── figures/                            # Generated plots
+├── token_level_analysis.ipynb   # Self-contained Colab notebook   <img width="888" height="398" alt="Screenshot 2026-07-18 at 15 46 23" src="https://github.com/user-attachments/assets/57a7fe78-d885-4a26-8a3c-aaa22efc684e" />
+
 └── README.md
 ```
 
