@@ -1,9 +1,9 @@
 # Token-Level-Analysis-of-Vision-Language-Models-in-Medical-Imaging
-Token-level interpretability analysis of CLIP vs. BiomedCLIP on chest X-ray retrieval — quantifying the modality shortcut in general-purpose vision-language models
+Token-level interpretability analysis of CLIP vs. MedCLIP on chest X-ray retrieval — quantifying the modality shortcut in general-purpose vision-language models
 
 # Which Words Drive Medical Image Retrieval?
 
-**A token-level interpretability analysis of CLIP and BiomedCLIP on chest X-rays.**
+**A token-level interpretability analysis of CLIP and MedCLIP on chest X-rays.**
 
 When a vision-language model retrieves chest X-rays from a query like *"chest X-ray showing pneumonia with lung opacity"*, which words are actually doing the work? Does the model respond to the diagnosis, the radiological finding, or just the imaging modality?
 
@@ -17,7 +17,7 @@ This project answers that question through systematic token ablation, and finds 
 Removing "X-ray" from a Cardiomegaly query drops retrieval by **0.58 MAP@10**. Removing the word *"cardiomegaly"* drops it by only **0.28** — less than half the impact. Averaged across all prompts, modality tokens are CLIP's highest-importance category (mean Δ MAP@10 = +0.097), while clinical tokens are net-negative (−0.024).
 
 **2. Domain adaptation inverts this.**
-For BiomedCLIP, modality tokens become functionally inert (mean Δ MAP@10 ≈ 0.000) while clinical tokens become dominant (+0.071). Every BiomedCLIP training example is a medical image, so "X-ray" carries no discriminative signal — exactly what contrastive learning predicts.
+For MedCLIP, modality tokens become functionally inert (mean Δ MAP@10 ≈ 0.000) while clinical tokens become dominant (+0.071). Every MedCLIP training example is a medical image, so "X-ray" carries no discriminative signal — exactly what contrastive learning predicts.
 
 **3. Neither model is compositional.**
 Adding words to a prompt often *hurts*. The word **"normal"** reduces CLIP's retrieval of normal chest X-rays by **0.42 MAP@10** — the largest single effect measured. Function words like "showing" can matter more than diagnoses. Tokens destructively interfere rather than combining additively.
@@ -29,7 +29,7 @@ CLIP's attention rollout is pathology-invariant: the same generic template appea
   <img width="888" height="398" alt="Screenshot 2026-07-18 at 15 46 23" src="https://github.com/user-attachments/assets/710197a5-16a1-4c6a-8d28-985f37a76ff0" />
 
   <br>
-  <em>Mean token importance by linguistic category. CLIP peaks on modality; BiomedCLIP peaks on clinical.</em>
+  <em>Mean token importance by linguistic category. CLIP peaks on modality; MedCLIP peaks on clinical.</em>
 </p>
 
 ---
@@ -38,7 +38,7 @@ CLIP's attention rollout is pathology-invariant: the same generic template appea
 
 **Dataset.** NIH ChestX-ray14, 800 images balanced across four classes (Cardiomegaly, Pneumonia, Effusion, No Finding), filtered to single-label cases.
 
-**Models.** CLIP ViT-B/32 (LAION-2B) and BiomedCLIP (PubMedBERT + ViT-B/16, 15M biomedical image-text pairs).
+**Models.** CLIP ViT-B/32 (LAION-2B) and MedCLIP (PubMedBERT + ViT-B/16, 15M biomedical image-text pairs).
 
 **Prompt taxonomy.** For each pathology, prompts at four linguistic levels — clinical (`"pneumonia"`), radiological (`"lung opacity"`), modality (`"chest X-ray"`), and a composite containing one token of each.
 
@@ -71,7 +71,7 @@ Single-token ablation is a first-order probe — it doesn't capture interactions
 ## References
 
 - Radford et al. (2021). *Learning Transferable Visual Models From Natural Language Supervision.* ICML.
-- Zhang et al. (2023). *BiomedCLIP: a multimodal biomedical foundation model pretrained from fifteen million scientific image-text pairs.* arXiv:2303.00915.
+- Zhang et al. (2023). *MedCLIP: a multimodal biomedical foundation model pretrained from fifteen million scientific image-text pairs.* arXiv:2303.00915.
 - Wang et al. (2017). *ChestX-ray8: Hospital-scale Chest X-ray Database and Benchmarks.* CVPR.
 - Abnar & Zuidema (2020). *Quantifying Attention Flow in Transformers.* ACL.
 
